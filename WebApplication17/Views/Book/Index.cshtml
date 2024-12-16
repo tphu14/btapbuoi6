@@ -1,0 +1,62 @@
+﻿@model IEnumerable<WebApplication17.Models.Book>
+
+@{
+    ViewData["Title"] = "Books";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<!-- Thống kê số lượng sách theo chủ đề -->
+<h3>Statistics</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Category</th>
+            <th>Number of Books</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (ViewBag.CategoryStats != null)
+
+        {
+
+            foreach (var stat in ViewBag.CategoryStats)
+
+            {
+                <tr>
+                    <td>@stat.CategoryName</td>
+                    <td>@stat.BookCount</td>
+                </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+<!-- Nút thêm sách -->
+<a asp-action="Add" class="btn btn-primary mb-3">Add New Book</a>
+
+<!-- Danh sách sách -->
+<div class="row">
+    @foreach (var book in Model)
+
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@book.Title</h5>
+                    <p><strong>Author:</strong> @book.Author</p>
+                    <p><strong>Category:</strong> @book.Category?.Name</p>
+                    @if (!string.IsNullOrEmpty(book.Image))
+                    {
+                        <img src="@book.Image" alt="Book Cover" class="img-fluid" />
+                    }
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-action="Display" asp-route-id="@book.Id" class="btn btn-primary">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@book.Id" class="btn btn-danger">Xóa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,13 @@
+﻿@model WebApplication17.Models.Book
+
+<h2>Delete Book</h2>
+
+<form asp-action="Delete" method="post">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
+    <p>Are you sure you want to delete the book titled "<strong>@Model.Title</strong>"?</p>
+    <p>Author: <strong>@Model.Author</strong></p>
+    <p>Price: <strong>@Model.Price</strong></p>
+    <p>Description: <em>@Model.Description</em></p>
+    <button type="submit" class="btn btn-danger">Delete</button>
+</form>

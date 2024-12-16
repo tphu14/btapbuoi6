@@ -1,0 +1,30 @@
+﻿@model IEnumerable<WebApplication17.Models.Book>
+
+@{
+    ViewData["Title"] = "Books in " + ViewBag.CategoryName;
+}
+
+<h2>@ViewBag.CategoryName</h2>
+
+<div class="row">
+    @foreach (var book in Model)
+    {
+        <div class="col-md-4">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@book.Title</h5>
+                    <p><strong>Tác giả:</strong> @book.Author</p>
+                    @if (!string.IsNullOrEmpty(book.Image))
+                    {
+                        <img src="@book.Image" alt="Book Cover" class="img-fluid" />
+                    }
+                    <div class="d-flex justify-content-between mt-3">
+                        <a asp-action="Display" asp-route-id="@book.Id" class="btn btn-primary">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@book.Id" class="btn btn-danger">Xóa</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    }
+</div>

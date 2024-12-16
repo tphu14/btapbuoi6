@@ -1,0 +1,35 @@
+﻿@model WebApplication17.Models.Category
+
+@{
+    ViewData["Title"] = "Chi tiết thể loại";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>@Model.Name</h4>
+    <p>Số lượng sách: @Model.Books?.Count ?? 0</p> <!-- Hiển thị số lượng sách -->
+
+    <h5>Sách trong thể loại:</h5>
+    <ul>
+        @if (Model.Books != null && Model.Books.Any())
+
+        {
+            @foreach (var book in Model.Books)
+
+            {
+                <li>
+                    <strong>@book.Title</strong> - @book.Author - @book.Price₫
+                </li>
+            }
+        }
+
+        else
+
+        {
+            <li>Không có sách trong thể loại này.</li>
+        }
+    </ul>
+
+    <a href="@Url.Action("Index")" class="btn btn-secondary">Quay lại</a>
+</div>
